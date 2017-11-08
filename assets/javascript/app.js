@@ -80,9 +80,16 @@ function stop() {
 run();
 
 //$("#start").on("click", function(),
+
+//function runGame() {
+
 for(var i = 0; i < allQuestions.length; i++) {
-    $("#questions").html(allQuestions[0].question);
+    $("#questions").html(allQuestions[i + 1].question);
+    $("#questions").append(allQuestions[i + 1].answerChoices.toString());
+
 }
+//};
+
 
 //$("#questions").html(allQuestions[0].picture);
 // for loop. $("#questions").text(allQuestions[0].answerChoices);
