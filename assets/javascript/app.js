@@ -52,7 +52,10 @@ var intervalId;
 // intervalId = setInterval(number.count, 1000);
 //}
 
-$("#start").on("click", run);
+$("#start").on("click", function() {
+    run();
+    //move stuff in here
+});
 
 function run() {
     intervalId = setInterval(decrement, 1000);
@@ -77,18 +80,39 @@ function stop() {
     clearInterval(intervalId);
 }
 
-run();
+var counter = 0
 
 //$("#start").on("click", function(),
 
-//function runGame() {
 
-for(var i = 0; i < allQuestions.length; i++) {
-    $("#questions").html(allQuestions[i + 1].question);
-    $("#questions").append(allQuestions[i + 1].answerChoices.toString());
+$("#questions").html(allQuestions[counter].question);
 
+for(var i = 0; i < allQuestions[counter].answerChoices.length; i++) {
+
+    $("#questions").append("<p class = 'click'>" + allQuestions[counter].answerChoices[i].toString() + "</p>");
 }
-//};
+
+function runGame() {
+
+    counter++;
+
+    $("#questions").html(allQuestions[counter].question);
+
+    for(var i = 0; i < allQuestions[counter].answerChoices.length; i++) {
+        $("#questions").append("<p class = 'click'>" + allQuestions[counter].answerChoices[i].toString() + "</p>");
+    }
+}
+
+$(document).on("click", ".click", function() {
+
+    if(allQuestions[counter].correctIndex === 3) {
+        $("#questions").html(allQuestions[counter].correctAnswer);
+    }
+    else {
+        alert("Wrong!");
+    }
+    runGame();
+});
 
 
 //$("#questions").html(allQuestions[0].picture);
