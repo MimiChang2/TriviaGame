@@ -1,0 +1,39 @@
+h1 {
+    font-family: Arial;
+    font-size: 50px;
+    background-color: teal;
+    color: white;
+    text-align: center
+}
+
+.row {
+    text-align: center;
+}
+
+#time {
+    font-family: Arial;
+    font-size: 47px;
+    color: purple;
+    text-align: center;
+}
+
+#questions {
+    font-family: Arial;
+    font-size: 40px;
+    color: teal;
+    text-align: center;
+}
+
+h3 {
+    font-family: Arial;
+    font-size: 30px;
+    color: purple;
+    text-align: center;
+}
+
+p {
+    font-family: Arial;
+    font-size: 30px;
+    color: teal;
+    text-align: center;
+}
