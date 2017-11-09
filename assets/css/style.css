@@ -24,6 +24,13 @@ h1 {
     text-align: center;
 }
 
+#score {
+    font-family: Arial;
+    font-size: 40px;
+    color: purple;
+    text-align: center;
+}
+
 h3 {
     font-family: Arial;
     font-size: 30px;

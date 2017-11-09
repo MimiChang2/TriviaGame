@@ -45,7 +45,7 @@ var allQuestions = [
 ]
 
 //start timer
-var number = 20;
+var number = 40;
 
 var intervalId;
 
@@ -116,7 +116,6 @@ function showCurrentQuestion() {
     }
 }
 //figure out which answer user clicked
-//var answerChoices = user click index
 
 var userGuess;
 
@@ -134,6 +133,7 @@ $(document).ready(function() {
         }
         else {
             alert("Wrong!");
+            $("#questions").html(allQuestions[counter].correctAnswer);
             losses++;
         }
 
@@ -150,8 +150,21 @@ $(document).ready(function() {
 
 if(number === 0) {
     updateScore();
+    stop();
 }
 
 function updateScore() {
     $("#score").text("Wins: " + wins + "Losses: " + losses + "Unanswered: " + unanswered)
+
 }
+
+//
+//setTimeout(twoSeconds, 1000 * 2);
+
+//function twoSeconds() {
+//   $("#time-left").append("game over")
+
+
+
+//$("#questions").html(allQuestions[0].picture);
+// for loop. $("#questions").text(allQuestions[0].answerChoices);
