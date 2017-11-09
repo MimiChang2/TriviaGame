@@ -1,3 +1,4 @@
+//array containing objects
 var allQuestions = [
 
     {
@@ -8,7 +9,7 @@ var allQuestions = [
             "Utah"
         ],
         picture: "assets/images/antelope.png",
-        correctIndex: 3,
+        correctIndex: "2",
         correctAnswer: "Arizona",
     },
 
@@ -19,7 +20,7 @@ var allQuestions = [
             "Illinois",
             "Nebraska"
         ],
-        correctIndex: 2,
+        correctIndex: "1",
         correctAnswer: "Utah"
     }, {
         question: "What is Florida's nickname?",
@@ -28,7 +29,7 @@ var allQuestions = [
             "Orange County",
             "Sunshine State"
         ],
-        correctIndex: 4,
+        correctIndex: "3",
         correctAnswer: "Sunshine State"
     }, {
         question: "The Channel Islands are part of which state?",
@@ -37,20 +38,29 @@ var allQuestions = [
             "Florida",
             "Alaska"
         ],
-        correctIndex: 1,
+        correctIndex: "0",
         correctAnswer: "California"
 
     }
 ]
 
-var number = 60;
+//start timer
+var number = 20;
 
 var intervalId;
+
+var wins = 0;
+var losses = 0;
+var unanswered = 0;
 
 //var slowTimer = false;
 //if(!slowTimer) {
 // intervalId = setInterval(number.count, 1000);
 //}
+
+
+//start the game when user clicks start button
+//run the function that starts timer and shows first question + answerChoices
 
 $("#start").on("click", function() {
     run();
@@ -59,11 +69,14 @@ $("#start").on("click", function() {
 
 function run() {
     intervalId = setInterval(decrement, 1000);
+
+    showCurrentQuestion();
 }
 
 function decrement() {
 
     number--;
+    number >= 0;
 
     $("#time").html("Time Remaining: " + number);
 
@@ -71,7 +84,7 @@ function decrement() {
 
         stop();
 
-        alert("Time Up!");
+        updateScore();
     }
 }
 
@@ -80,40 +93,65 @@ function stop() {
     clearInterval(intervalId);
 }
 
+//setting counter to refer to each object (question set) in the array
 var counter = 0
 
 //$("#start").on("click", function(),
 
+//running the first question set with answer choices
+//$("#questions").html(allQuestions[counter].question);
 
-$("#questions").html(allQuestions[counter].question);
+//for(var i = 0; i < allQuestions[counter].answerChoices.length; i++) {
 
-for(var i = 0; i < allQuestions[counter].answerChoices.length; i++) {
+//  $("#questions").append("<p class = 'click'>" + allQuestions[counter].answerChoices[i].toString() + "</p>");
+//}
 
-    $("#questions").append("<p class = 'click'>" + allQuestions[counter].answerChoices[i].toString() + "</p>");
-}
-
-function runGame() {
-
-    counter++;
+//set a function loop to show the next question and subsequent questions.
+function showCurrentQuestion() {
 
     $("#questions").html(allQuestions[counter].question);
 
     for(var i = 0; i < allQuestions[counter].answerChoices.length; i++) {
-        $("#questions").append("<p class = 'click'>" + allQuestions[counter].answerChoices[i].toString() + "</p>");
+        $("#questions").append("<button class = 'button' value= '" + i + "' >" + i + allQuestions[counter].answerChoices[i].toString() + "</button>");
     }
 }
+//figure out which answer user clicked
+//var answerChoices = user click index
 
-$(document).on("click", ".click", function() {
+var userGuess;
 
-    if(allQuestions[counter].correctIndex === 3) {
-        $("#questions").html(allQuestions[counter].correctAnswer);
-    }
-    else {
-        alert("Wrong!");
-    }
-    runGame();
+$(document).ready(function() {
+    $(document).on("click", ".button", function() {
+        userGuess = $(this).attr('value'); // add value to array
+
+        console.log("User guessed: '" + userGuess + "'");
+        console.log("Expected: '" + allQuestions[counter].correctIndex + "'");
+
+        // this MUST happen for every click, not just one time
+        if(allQuestions[counter].correctIndex === userGuess) {
+            $("#questions").html(allQuestions[counter].correctAnswer);
+            wins++;
+        }
+        else {
+            alert("Wrong!");
+            losses++;
+        }
+
+        counter++;
+
+        showCurrentQuestion();
+    });
 });
 
 
-//$("#questions").html(allQuestions[0].picture);
-// for loop. $("#questions").text(allQuestions[0].answerChoices);
+
+
+// when timer = 0
+
+if(number === 0) {
+    updateScore();
+}
+
+function updateScore() {
+    $("#score").text("Wins: " + wins + "Losses: " + losses + "Unanswered: " + unanswered)
+}
