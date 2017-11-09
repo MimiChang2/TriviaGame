@@ -117,6 +117,14 @@ function showCurrentQuestion() {
 }
 //figure out which answer user clicked
 
+// when timer = 0
+function timeUp() {
+    if(number === 0) {
+        updateScore();
+        stop();
+    }
+}
+
 var userGuess;
 
 $(document).ready(function() {
@@ -137,21 +145,19 @@ $(document).ready(function() {
             losses++;
         }
 
+        timeUp();
+
+        setTimeout(showCurrentQuestion, 1000 * 2);
+
         counter++;
 
-        showCurrentQuestion();
     });
 });
 
 
 
 
-// when timer = 0
 
-if(number === 0) {
-    updateScore();
-    stop();
-}
 
 function updateScore() {
     $("#score").text("Wins: " + wins + "Losses: " + losses + "Unanswered: " + unanswered)
