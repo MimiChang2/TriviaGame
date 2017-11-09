@@ -8,7 +8,7 @@ var allQuestions = [
             "Arizona",
             "Utah"
         ],
-        picture: "assets/images/antelope.png",
+        picture: "<img src= 'assets/images/antelope.png'>",
         correctIndex: "2",
         correctAnswer: "Arizona",
     },
@@ -20,6 +20,7 @@ var allQuestions = [
             "Illinois",
             "Nebraska"
         ],
+        picture: "<img src= 'assets/images/arches.png'>",
         correctIndex: "1",
         correctAnswer: "Utah"
     }, {
@@ -29,6 +30,7 @@ var allQuestions = [
             "Orange County",
             "Sunshine State"
         ],
+        picture: "<img src= 'assets/images/miami.png'>",
         correctIndex: "3",
         correctAnswer: "Sunshine State"
     }, {
@@ -38,6 +40,7 @@ var allQuestions = [
             "Florida",
             "Alaska"
         ],
+        picture: "<img src= 'assets/images/cali.png'>",
         correctIndex: "0",
         correctAnswer: "California"
 
@@ -137,11 +140,14 @@ $(document).ready(function() {
         // this MUST happen for every click, not just one time
         if(allQuestions[counter].correctIndex === userGuess) {
             $("#questions").html(allQuestions[counter].correctAnswer);
+            $("#questions").append(allQuestions[counter].picture);
             wins++;
         }
         else {
             alert("Wrong!");
             $("#questions").html(allQuestions[counter].correctAnswer);
+            $("#questions").append(allQuestions[counter].picture);
+
             losses++;
         }
 
